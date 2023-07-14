@@ -1,4 +1,10 @@
-- There's a couple of typedefs which are being translated properly into type declarations in rust, but references to them are pointing to the main windows crate. Might be able to fix with some settings, not sure. PFN_DESTRUCTION_CALLBACK is one of them.
+- There's a couple of typedefs which are being translated properly into type declarations in rust, but references to them are pointing to the main windows crate. Might be able to fix with some settings, not sure. 
+    PFN_DESTRUCTION_CALLBACK is one of them.
+    D3D12MessageFunc is the other.
+    These ones are referencing D3D12 in the .winmd, so it is happening at the scrapping/emitting stage at least.
+    These might be the only places in the API that take callback functions. 
+https://github.com/microsoft/win32metadata/blob/main/docs/generationOptions.md#function-pointer-fixups
+
 
 - Going to be lots of metadata fixups I'm sure. Best approach would be to write some samples and see what I come across, plus grabbing any in the win32 repo that are already done.
 

@@ -7,6 +7,10 @@
         <ExcludeFromCrossarch>Microsoft.AgilitySdk</ExcludeFromCrossarch>
     </PropertyGroup>
 
+    <ItemGroup>
+        <FunctionPointerFixup Include="functionPointerFixups.json"/>
+    </ItemGroup>
+
     <Target Name="CopyNativeLibs" AfterTargets="Build">
         <ItemGroup>
             <Direct3DNativeFiles Include="$(PkgMicrosoft_Direct3D_D3D12)\build\native\bin\x64\*"/>
@@ -15,6 +19,7 @@
     </Target>
     
     <ItemGroup>
+        
         <Partition Include="main.cpp">
             <TraverseFiles>
                 $(AgilityIncRoot)\d3d12.h;

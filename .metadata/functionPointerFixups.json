@@ -1,0 +1,10 @@
+[
+    {
+        "name": "D3D12MessageFunc",
+        "alreadyPointer": true
+    },
+    {
+        "name": "PFN_DESTRUCTION_CALLBACK",
+        "alreadyPointer": true
+    }
+]

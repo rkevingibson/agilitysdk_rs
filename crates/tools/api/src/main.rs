@@ -1,12 +1,8 @@
-use std::{fs, path::PathBuf, process::Command, vec};
+use std::{fs, path::PathBuf, process::Command};
 use windows_metadata::reader::File;
 
 fn main() {
-    let mut files = File::with_default(&[]).unwrap();
-    files.insert(
-        0,
-        File::new(".windows/winmd/Microsoft.AgilitySdk.winmd").unwrap(),
-    );
+    let files = File::with_default(&[".windows/winmd/Microsoft.AgilitySdk.winmd"]).unwrap();
 
     let output_path = PathBuf::from("src/d3d12.rs");
     if output_path.exists() {
