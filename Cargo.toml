@@ -1,0 +1,21 @@
+[package]
+name = "agility-sdk-rs"
+version = "0.1.0"
+edition = "2021"
+
+[workspace]
+members = [
+    "crates/tools/*",
+]
+
+[dependencies]
+
+[dependencies.windows]
+version = "0.46.0"
+features = [
+    "implement",
+    "Win32_Foundation",
+    "Win32_Graphics_Dxgi_Common",
+    "Win32_Graphics_Direct3D11on12",
+    "Win32_Security",
+]

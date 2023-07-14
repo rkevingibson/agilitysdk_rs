@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.Windows.WinmdGenerator/0.52.65-preview">
+    <PropertyGroup Label="Globals">
+        <OutputWinmd>../.windows/winmd/Microsoft.AgilitySdk.winmd</OutputWinmd>
+        <WinmdVersion>255.255.255.255</WinmdVersion>
+        <AgilityIncRoot>$(PkgMicrosoft_Direct3D_D3D12)\build\native\include</AgilityIncRoot>
+        <ExcludeFromCrossarch>Microsoft.AgilitySdk</ExcludeFromCrossarch>
+    </PropertyGroup>
+
+    <Target Name="CopyNativeLibs" AfterTargets="Build">
+        <ItemGroup>
+            <Direct3DNativeFiles Include="$(PkgMicrosoft_Direct3D_D3D12)\build\native\bin\x64\*"/>
+        </ItemGroup>
+        <Copy SourceFiles="@(Direct3DNativeFiles)" DestinationFolder="../.windows/x64"/>
+    </Target>
+    
+    <ItemGroup>
+        <Partition Include="main.cpp">
+            <TraverseFiles>
+                $(AgilityIncRoot)\d3d12.h;
+                $(AgilityIncRoot)\d3dcommon.h;
+                $(AgilityIncRoot)\d3d12sdklayers.h;
+                $(AgilityIncRoot)\d3d12compatibility.h;
+                $(AgilityIncRoot)\d3d12shader.h;
+                $(AgilityIncRoot)\d3d12video.h;
+                $(AgilityIncRoot)\dxgiformat.h;
+            </TraverseFiles>
+            <Namespace>Microsoft.AgilitySdk</Namespace>
+        </Partition>
+
+        <PackageReference Include="Microsoft.Direct3D.D3D12" Version="1.711.3-preview" GeneratePathProperty="true">
+            <IncludeAssets>none</IncludeAssets>
+        </PackageReference>
+    </ItemGroup>
+</Project>

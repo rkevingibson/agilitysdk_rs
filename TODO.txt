@@ -1,0 +1,5 @@
+- There's a couple of typedefs which are being translated properly into type declarations in rust, but references to them are pointing to the main windows crate. Might be able to fix with some settings, not sure. PFN_DESTRUCTION_CALLBACK is one of them.
+
+- Going to be lots of metadata fixups I'm sure. Best approach would be to write some samples and see what I come across, plus grabbing any in the win32 repo that are already done.
+
+- Maybe need to generate default .winmd for windows but without d3d stuff? Tried reordering things, but no go.
