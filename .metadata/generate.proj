@@ -5,11 +5,8 @@
         <WinmdVersion>255.255.255.255</WinmdVersion>
         <AgilityIncRoot>$(PkgMicrosoft_Direct3D_D3D12)\build\native\include</AgilityIncRoot>
         <ExcludeFromCrossarch>Microsoft.AgilitySdk</ExcludeFromCrossarch>
+        <UseWinSDKAssets>false</UseWinSDKAssets>
     </PropertyGroup>
-
-    <ItemGroup>
-        <FunctionPointerFixup Include="functionPointerFixups.json"/>
-    </ItemGroup>
 
     <Target Name="CopyNativeLibs" AfterTargets="Build">
         <ItemGroup>
@@ -17,12 +14,21 @@
         </ItemGroup>
         <Copy SourceFiles="@(Direct3DNativeFiles)" DestinationFolder="../.windows/x64"/>
     </Target>
+
+    <ItemGroup>
+        <EmitterRsp Include="emitter.settings.rsp"/>
+        <FunctionPointerFixup Include="functionPointerFixups.json"/>
+        <FunctionPointerFixup Include="$(WinSDKAssets)\functionPointerFixups.json"/>
+        <AutoTypesForSettingsOnly Include="$(WinSDKAssets)\autotypes.json"/>
+        <ScraperRsp Include="$(WinSDKAssets)\scraper.settings.rsp"/>
+    </ItemGroup>
     
     <ItemGroup>
-        
+        <ManualCs Include="*.manual.cs" />
+        <Idls Include="$(AgilityIncRoot)\d3d12.idl"/>
         <Partition Include="main.cpp">
             <TraverseFiles>
-                $(AgilityIncRoot)\d3d12.h;
+                $(CompiledHeadersDir)\d3d12.h;
                 $(AgilityIncRoot)\d3dcommon.h;
                 $(AgilityIncRoot)\d3d12sdklayers.h;
                 $(AgilityIncRoot)\d3d12compatibility.h;
